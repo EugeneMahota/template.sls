@@ -3,7 +3,7 @@ import { DEV_ENVS } from './environment.dev';
 import { PROD_ENVS } from './environment.prod';
 import { TEST_ENVS } from './environment.test';
 
-export function getStages() {
+export function buildStages() {
   return {
     default: {
       params: COMMON_ENVS,
@@ -20,7 +20,7 @@ export function getStages() {
   };
 }
 
-export function getEnvs() {
+export function buildEnvs() {
   const allEnvKeys: string[] = Array.from(new Set([
     ...Object.keys(COMMON_ENVS),
     ...Object.keys(DEV_ENVS),
