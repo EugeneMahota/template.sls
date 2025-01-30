@@ -15,6 +15,7 @@ export function buildStages() {
       params: TEST_ENVS,
     },
     prod: {
+      // observability: true,
       params: PROD_ENVS,
     },
   };

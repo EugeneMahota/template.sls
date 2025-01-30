@@ -23,5 +23,8 @@
     "serverless-offline": "^14.4.0",
     "serverless-prune-plugin": "^2.1.0",
     "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@floteam/errors": "^1.0.8"
   }
 }
