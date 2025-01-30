@@ -1,0 +1,15 @@
+{
+  "name": "sls-v4",
+  "version": "0.0.1",
+  "engines": {
+    "node": "22",
+    "npm": ">=11"
+  },
+  "devDependencies": {
+    "@types/serverless": "^3.12.26",
+    "serverless": "^4.5.1"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.2"
+  }
+}
