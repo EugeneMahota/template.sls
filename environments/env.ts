@@ -1,20 +1,9 @@
-const COMMON_ENVS = {
-  STAGE: 'dev',
-  TEST_ENV: '1234',
-  BOOLEAN_ENV: true,
-};
+import { COMMON_ENVS } from './environment.common';
+import { DEV_ENVS } from './environment.dev';
+import { PROD_ENVS } from './environment.prod';
+import { TEST_ENVS } from './environment.test';
 
-const DEV_ENVS = {
-  STAGE: 'dev',
-};
-const TEST_ENVS = {
-  STAGE: 'test',
-};
-const PROD_ENVS = {
-  STAGE: 'prod',
-};
-
-export function getStagesEnvs() {
+export function getStages() {
   return {
     default: {
       params: COMMON_ENVS,

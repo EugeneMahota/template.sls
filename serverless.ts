@@ -1,15 +1,16 @@
 import type { Serverless } from 'serverless/aws'
-import { getEnvs, getStagesEnvs } from './env';
+import { getEnvs, getStages } from './environments/env';
 
 const mainConfig: Serverless = {
   service: 'sls-v4',
   // @ts-ignore
-  stages: getStagesEnvs(),
+  stages: getStages(),
   provider: {
     name: 'aws',
     runtime: 'nodejs22.x',
-    region: 'us-east-1',
-    profile: 'eugene',
+    region: '${param:REGION}',
+    profile: '${param:PROFILE}',
+    stage: '${opt:stage, "dev"}',
     environment: getEnvs(),
   },
   useDotenv: true,
