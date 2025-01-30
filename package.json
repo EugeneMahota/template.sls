@@ -1,15 +1,27 @@
 {
   "name": "sls-v4",
   "version": "0.0.1",
+  "scripts": {
+    "deploy:local": "sls offline --stage dev",
+    "deploy:dev": "sls deploy --stage dev --config serverless.ts --verbose",
+    "deploy:test": "sls deploy --stage test --config serverless.ts --verbose",
+    "deploy:prod": "sls deploy --stage prod --config serverless.ts --verbose"
+  },
   "engines": {
     "node": "22",
     "npm": ">=11"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eugenemahota/template.sls"
+  },
+  "author": "Eugene Mahota",
   "devDependencies": {
     "@types/serverless": "^3.12.26",
-    "serverless": "^4.5.1"
-  },
-  "dependencies": {
+    "deepmerge": "^4.3.1",
+    "serverless": "^4.5.1",
+    "serverless-offline": "^14.4.0",
+    "serverless-prune-plugin": "^2.1.0",
     "ts-node": "^10.9.2"
   }
 }

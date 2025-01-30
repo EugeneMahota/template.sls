@@ -1,8 +1,12 @@
 import type { Serverless } from 'serverless/aws'
 import { getEnvs, getStages } from './environments/env';
+import { lambdaFunctions } from './serverless/parts/functions';
+import { permissions } from './serverless/parts/permissions';
+import { joinParts } from './serverless/utils';
 
 const mainConfig: Serverless = {
-  service: 'sls-v4',
+  service: '${param:SERVICE_NAME}',
+  /** I don't know, but... */
   // @ts-ignore
   stages: getStages(),
   provider: {
@@ -13,22 +17,22 @@ const mainConfig: Serverless = {
     stage: '${opt:stage, "dev"}',
     environment: getEnvs(),
   },
-  useDotenv: true,
-  functions: {
-    usersCreate: {
-      handler: 'handler.createUser',
-      events: [
-        {
-          http: {
-            method: 'post',
-            path: '/users',
-            integration: 'lambda',
-            cors: true,
-          }
-        },
-      ],
+  custom: {
+    prune: {
+      automatic: true,
+      number: 3,
+    },
+    'serverless-offline': {
+      ignoreJWTSignature: true,
     },
   },
+  plugins: [
+    'serverless-prune-plugin',
+    'serverless-offline'
+  ],
 }
 
-module.exports = mainConfig;
+module.exports = joinParts(mainConfig, [
+  lambdaFunctions,
+  permissions,
+]);
