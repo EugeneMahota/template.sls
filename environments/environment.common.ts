@@ -1,7 +1,5 @@
-const SERVICE_NAME: string = 'sls-v4';
-
 export const COMMON_ENVS = {
-  SERVICE_NAME: SERVICE_NAME,
+  SERVICE_NAME: 'sls-v4',
   REGION: 'us-east-1',
   PROFILE: 'eugene',
   IS_OFFLINE: 'false',
