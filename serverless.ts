@@ -2,10 +2,12 @@ import type { Serverless } from 'serverless/aws'
 import { buildEnvs, buildStages } from './environments/env-builder';
 import { lambdaFunctions } from './serverless/parts/functions';
 import { permissions } from './serverless/parts/permissions';
+import { dynamoTables } from './serverless/parts/tables';
 import { joinParts } from './serverless/utils';
 
 const mainConfig: Serverless = {
   service: '${param:SERVICE_NAME}',
+  frameworkVersion: '4.5.2',
   /** I don't know, but... */
   // @ts-ignore
   stages: buildStages(),
@@ -35,4 +37,5 @@ const mainConfig: Serverless = {
 module.exports = joinParts(mainConfig, [
   lambdaFunctions,
   permissions,
+  dynamoTables,
 ]);

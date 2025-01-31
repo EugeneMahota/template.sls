@@ -17,14 +17,16 @@
   },
   "author": "Eugene Mahota",
   "devDependencies": {
-    "serverless": "^4.5.1",
     "@types/serverless": "^3.12.26",
     "deepmerge": "^4.3.1",
+    "serverless": "^4.5.1",
     "serverless-offline": "^14.4.0",
     "serverless-prune-plugin": "^2.1.0",
     "ts-node": "^10.9.2"
   },
   "dependencies": {
-    "@floteam/errors": "^1.0.8"
+    "@floteam/errors": "^1.0.8",
+    "dynamoose": "^4.0.3",
+    "uuid": "^11.0.5"
   }
 }

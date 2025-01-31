@@ -1,4 +1,4 @@
 export const DEV_ENVS = {
   STAGE: 'dev',
-  IS_OFFLINE: true,
+  IS_OFFLINE: 'true',
 };
