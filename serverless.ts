@@ -15,9 +15,15 @@ const mainConfig: Serverless = {
     name: 'aws',
     runtime: 'nodejs22.x',
     region: '${param:REGION}',
-    profile: '${param:PROFILE}',
+    profile: '${param:AWS_PROFILE}',
     stage: '${opt:stage, "dev"}',
     environment: buildEnvs(),
+  },
+  build: {
+    esbuild: {
+      bundle: true, // bundling the function code and dependencies into a single file. (Default: true)
+      minify: true // minifying the built code. (Default: false),
+    },
   },
   custom: {
     prune: {
@@ -35,7 +41,7 @@ const mainConfig: Serverless = {
 }
 
 module.exports = joinParts(mainConfig, [
-  lambdaFunctions,
   permissions,
+  lambdaFunctions,
   dynamoTables,
 ]);

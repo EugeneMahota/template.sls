@@ -1,8 +1,7 @@
-import { getEnv } from '../helper/environment';
 import { dynamodbLocalConnection } from './dynamodb.local';
-
 dynamodbLocalConnection();
 
+import { getEnv } from '../helper/environment';
 import * as dynamoose from 'dynamoose';
 import { Item } from 'dynamoose/dist/Item';
 import { v7 as uuidv7 } from 'uuid';

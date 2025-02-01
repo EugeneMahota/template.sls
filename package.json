@@ -2,10 +2,15 @@
   "name": "sls-v4",
   "version": "0.0.1",
   "scripts": {
-    "deploy:local": "sls offline --stage dev",
-    "deploy:dev": "sls deploy --stage dev --config serverless.ts --verbose",
-    "deploy:test": "sls deploy --stage test --config serverless.ts --verbose",
-    "deploy:prod": "sls deploy --stage prod --config serverless.ts --verbose"
+    "deploy:dev:local": "sls offline --stage dev --verbose",
+    "deploy:dev": "sls deploy --stage dev --verbose",
+    "deploy:test": "sls deploy --stage test --verbose",
+    "deploy:prod": "sls deploy --stage prod --verbose",
+    "deploy:dev:func:testFunction": "sls deploy function --function testFunction --stage dev",
+    "deploy:dev:func:config:testFunction": "sls deploy function --function testFunction --stage dev --update-config",
+    "sls:package:dev": "sls package --stage dev",
+    "sls:package:test": "sls package --stage test",
+    "sls:package:prod": "sls package --stage prod"
   },
   "engines": {
     "node": "22",
@@ -26,6 +31,7 @@
   },
   "dependencies": {
     "@floteam/errors": "^1.0.8",
+    "aws-sdk": "^2.1692.0",
     "dynamoose": "^4.0.3",
     "uuid": "^11.0.5"
   }
