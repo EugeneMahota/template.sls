@@ -30,8 +30,8 @@
     "ts-node": "^10.9.2"
   },
   "dependencies": {
+    "@aws-sdk/credential-providers": "^3.738.0",
     "@floteam/errors": "^1.0.8",
-    "aws-sdk": "^2.1692.0",
     "dynamoose": "^4.0.3",
     "uuid": "^11.0.5"
   }

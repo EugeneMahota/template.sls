@@ -6,8 +6,9 @@ import { LambdaEvent } from '../types';
 export const testFunction = async (event: LambdaEvent<{}, {}, {}, {}>): Promise<any> => {
   try {
     log('testFunction: ', event.body);
-    await LogsModel.create({ eventCode: EventLogCode.CREATE });
-    return { message: 'All good:)' };
+    await LogsModel.create({ eventCode: EventLogCode.DELETE });
+    const data = (await LogsModel.scan().all().exec()).map(v => v);
+    return { message: 'All good:)', data };
   } catch (error) {
     return restErrorHandler(error);
   }

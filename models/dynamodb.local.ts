@@ -1,4 +1,4 @@
-import { SharedIniFileCredentials } from 'aws-sdk';
+import { fromIni } from '@aws-sdk/credential-providers';
 import * as dynamoose from 'dynamoose';
 import { getEnv } from '../helper/environment';
 import { log } from '../helper/logger';
@@ -6,7 +6,8 @@ import { log } from '../helper/logger';
 export function dynamodbLocalConnection(): void {
   if (getEnv('IS_OFFLINE') === 'true') {
     try {
-      const credentials = new SharedIniFileCredentials({ profile: getEnv('AWS_PROFILE') });
+
+      const credentials = fromIni({ profile: getEnv('PROFILE') });
       const ddb = new dynamoose.aws.ddb.DynamoDB({
         credentials,
         region: getEnv('REGION'),

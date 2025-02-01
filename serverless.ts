@@ -15,7 +15,7 @@ const mainConfig: Serverless = {
     name: 'aws',
     runtime: 'nodejs22.x',
     region: '${param:REGION}',
-    profile: '${param:AWS_PROFILE}',
+    profile: '${param:PROFILE}',
     stage: '${opt:stage, "dev"}',
     environment: buildEnvs(),
   },
@@ -27,7 +27,7 @@ const mainConfig: Serverless = {
       bundle: true,
       minify: '${param:ESB_MINIFY}',
       sourcemap: '${param:ESB_SOURCEMAP}',
-      exclude: ['aws-sdk'],
+      exclude: ['aws-sdk', '@aws-sdk/credential-providers'],
       target: 'node22',
       platform: 'node',
       define: {
