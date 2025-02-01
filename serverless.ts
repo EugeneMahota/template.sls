@@ -19,10 +19,20 @@ const mainConfig: Serverless = {
     stage: '${opt:stage, "dev"}',
     environment: buildEnvs(),
   },
+  package: {
+    individually: true,
+  },
   build: {
     esbuild: {
-      bundle: true, // bundling the function code and dependencies into a single file. (Default: true)
-      minify: true // minifying the built code. (Default: false),
+      bundle: true,
+      minify: '${param:ESB_MINIFY}',
+      sourcemap: '${param:ESB_SOURCEMAP}',
+      exclude: ['aws-sdk'],
+      target: 'node22',
+      platform: 'node',
+      define: {
+        'require.resolve': undefined,
+      }
     },
   },
   custom: {
