@@ -4,7 +4,7 @@ export const lambdaFunctions: AWSPartitial = {
   functions: {
     testFunction: {
       handler: 'src/api/test-function/handler.testFunction',
-      memorySize: 256,
+      memorySize: 128,
       timeout: 29,
       events: [
         {
