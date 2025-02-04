@@ -11,7 +11,6 @@ export const lambdaFunctions: AWSPartitial = {
           http: {
             method: 'post',
             path: '/api/test-function',
-            integration: 'lambda',
             cors: true,
           }
         },

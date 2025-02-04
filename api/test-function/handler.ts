@@ -1,15 +1,22 @@
-import { restErrorHandler } from '../../helper/error-handler/error-handler';
+import { MiddyfiedHandler } from '@middy/core';
+import * as createHttpError from 'http-errors';
+import { wait } from '../../helper/helper';
 import { log } from '../../helper/logger';
-import { EventLogCode, LogsModel } from '../../models/logs.model';
+import { restApiHandler } from '../rest-api-wrapper';
 import { LambdaEvent } from '../types';
 
-export const testFunction = async (event: LambdaEvent<{}, {}, {}, {}>): Promise<any> => {
-  try {
-    log('testFunction: ', event.body);
-    await LogsModel.create({ eventCode: EventLogCode.DELETE });
-    const data = (await LogsModel.scan().all().exec()).map(v => v);
-    return { message: 'All good:)', data };
-  } catch (error) {
-    return restErrorHandler(error);
-  }
-}
+type TestFuncBody = { isShowError: boolean };
+
+export const testFunction: MiddyfiedHandler<LambdaEvent<TestFuncBody, {}, {}, {}>> = restApiHandler(
+  async (event): Promise<any> => {
+    log('testFunction: ', event);
+
+    await wait(4);
+
+    if (event.body.isShowError) {
+      throw createHttpError.BadRequest('Something went wrong');
+    }
+
+    return { message: 'All good:)' };
+  },
+)

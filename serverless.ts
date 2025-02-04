@@ -2,7 +2,6 @@ import type { Serverless } from 'serverless/aws'
 import { buildEnvs, buildStages } from './environments/env-builder';
 import { lambdaFunctions } from './serverless/parts/functions';
 import { permissions } from './serverless/parts/permissions';
-import { dynamoTables } from './serverless/parts/tables';
 import { joinParts } from './serverless/utils';
 
 const mainConfig: Serverless = {
@@ -53,5 +52,5 @@ const mainConfig: Serverless = {
 module.exports = joinParts(mainConfig, [
   permissions,
   lambdaFunctions,
-  dynamoTables,
+  // dynamoTables,
 ]);

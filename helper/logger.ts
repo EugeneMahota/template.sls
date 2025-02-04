@@ -26,3 +26,14 @@ export const debug = wrapLogger(console.debug.bind(console));
 export const info = wrapLogger(console.info.bind(console));
 export const error = wrapLogger(console.error.bind(console));
 export const warn = wrapLogger(console.warn.bind(console));
+
+
+export function cloudWatchLogUrl(): string {
+  const region: string = getEnv('REGION');
+  const logGroupName: string = getEnv('AWS_LAMBDA_LOG_GROUP_NAME');
+  const logStreamName: string = getEnv('AWS_LAMBDA_LOG_STREAM_NAME');
+  const encodedLogGroupName: string = encodeURIComponent(logGroupName);
+  const encodedLogStreamName: string = encodeURIComponent(logStreamName);
+
+  return `https://${region}.console.aws.amazon.com/cloudwatch/home?region=${region}#logsV2:log-groups/log-group/${encodedLogGroupName}/log-events/${encodedLogStreamName}`;
+}
