@@ -1,5 +1,5 @@
 import type { Serverless } from 'serverless/aws'
-import { buildEnvs, buildStages } from './environments/env-builder';
+import { buildEnvs, buildStages } from './serverless/environments/env-builder';
 import { lambdaFunctions } from './serverless/parts/functions';
 import { permissions } from './serverless/parts/permissions';
 import { joinParts } from './serverless/utils';

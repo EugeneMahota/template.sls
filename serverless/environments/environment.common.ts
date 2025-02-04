@@ -1,4 +1,4 @@
-import { ResourceName } from '../serverless/intrinsic-fn';
+import { ResourceName } from '../intrinsic-fn';
 
 export const COMMON_ENVS = {
   SERVICE_NAME: 'sls-v4',

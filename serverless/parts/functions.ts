@@ -3,7 +3,7 @@ import { AWSPartitial } from '../types';
 export const lambdaFunctions: AWSPartitial = {
   functions: {
     testFunction: {
-      handler: 'api/test-function/handler.testFunction',
+      handler: 'src/api/test-function/handler.testFunction',
       memorySize: 256,
       timeout: 29,
       events: [
