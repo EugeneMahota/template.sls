@@ -1,14 +1,13 @@
-import type { Serverless } from 'serverless/aws'
 import { buildEnvs, buildStages } from './serverless/environments/env-builder';
 import { lambdaFunctions } from './serverless/parts/functions';
 import { permissions } from './serverless/parts/permissions';
+import { stepFunctions } from './serverless/parts/step-functions';
+import { CustomServerless } from './serverless/types';
 import { joinParts } from './serverless/utils';
 
-const mainConfig: Serverless = {
+const mainConfig: CustomServerless = {
   service: '${param:SERVICE_NAME}',
   frameworkVersion: '4.5.2',
-  /** I don't know, but... */
-  // @ts-ignore
   stages: buildStages(),
   provider: {
     name: 'aws',
@@ -45,7 +44,8 @@ const mainConfig: Serverless = {
   },
   plugins: [
     'serverless-prune-plugin',
-    'serverless-offline'
+    'serverless-offline',
+    'serverless-step-functions',
   ],
 }
 
@@ -53,4 +53,5 @@ module.exports = joinParts(mainConfig, [
   permissions,
   lambdaFunctions,
   // dynamoTables,
+  stepFunctions
 ]);

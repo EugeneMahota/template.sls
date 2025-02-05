@@ -13,4 +13,8 @@ export const COMMON_ENVS = {
   /** tables */
   LOGS_TABLE: ResourceName('logs'),
   LOGS_TABLE_CODE_INDEX: ResourceName('logs-code-index'),
+
+  /** step functions statemachine */
+  DEFERRED_CALL_STATEMACHINE: ResourceName('deferred-call'),
+
 };

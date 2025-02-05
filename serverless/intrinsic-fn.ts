@@ -1,4 +1,4 @@
-export function Arn(resource: string): { 'Fn::GetAtt': string[] } {
+export function Arn(resource: string): { 'Fn::GetAtt': [string, 'Arn'] } {
   return { 'Fn::GetAtt': [resource, 'Arn'] };
 }
 

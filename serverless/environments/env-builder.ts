@@ -1,9 +1,10 @@
+import { SlsStages } from '../types';
 import { COMMON_ENVS } from './environment.common';
 import { DEV_ENVS } from './environment.dev';
 import { PROD_ENVS } from './environment.prod';
 import { TEST_ENVS } from './environment.test';
 
-export function buildStages() {
+export function buildStages(): SlsStages['stages'] {
   return {
     default: {
       params: COMMON_ENVS,
@@ -21,7 +22,7 @@ export function buildStages() {
   };
 }
 
-export function buildEnvs() {
+export function buildEnvs(): Record<string, string> {
   const allEnvKeys: string[] = Array.from(new Set([
     ...Object.keys(COMMON_ENVS),
     ...Object.keys(DEV_ENVS),
