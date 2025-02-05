@@ -5,9 +5,10 @@ import { restApiHandler } from '../rest-api-wrapper';
 import { LambdaEvent } from '../types';
 
 type TestFuncBody = { isShowError: boolean };
+type TestFuncResponse = { message: string };
 
 export const testFunction: MiddyfiedHandler<LambdaEvent<TestFuncBody, {}, {}, {}>> = restApiHandler(
-  async (event): Promise<any> => {
+  async (event): Promise<TestFuncResponse> => {
     log('testFunction: ', event);
 
     if (event.body.isShowError) {
