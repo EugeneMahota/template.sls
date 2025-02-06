@@ -35,6 +35,7 @@
     "@middy/http-error-handler": "^6.0.0",
     "@middy/http-json-body-parser": "^6.0.0",
     "@middy/http-response-serializer": "^6.0.0",
+    "@middy/validator": "^6.0.0",
     "aws-lambda": "^1.0.7",
     "dynamoose": "^4.0.3",
     "http-errors": "^2.0.0",

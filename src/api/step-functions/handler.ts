@@ -7,9 +7,8 @@ import { LambdaEvent } from '../types';
 
 export const scheduleDelayedFunction: MiddyfiedHandler = restApiHandler(
   async (event: LambdaEvent<{}, {}, {}, {}>): Promise<{ message: string }> => {
-    log('callDeferredFunction: ', event);
     const utcDateAfter3Minutes: string = new Date(Date.now() + 1000 * 60 * 3).toISOString();
-    const client = new SFNClient();
+    const client: SFNClient = new SFNClient();
     const inputData = JSON.stringify({
       scheduledTime: utcDateAfter3Minutes,
       answer: 42, /** just additional param */
@@ -24,6 +23,6 @@ export const scheduleDelayedFunction: MiddyfiedHandler = restApiHandler(
   },
 );
 
-export const delayedFunctionHandler = async (event) => {
+export const delayedFunctionHandler = async (event: { scheduledTime: string; answer: unknown }) => {
   log('delayedFunctionHandler: ', event);
 }
