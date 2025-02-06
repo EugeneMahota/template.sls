@@ -34,7 +34,6 @@ export const EventLogSchema = new dynamoose.Schema(
       required: true,
       type: String,
       enum: EventLogCodes,
-      rangeKey: true,
       index: {
         type: 'global',
         name: getEnv('LOGS_TABLE_CODE_INDEX'),
