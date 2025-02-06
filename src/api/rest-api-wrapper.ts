@@ -9,6 +9,10 @@ import responseSerializer from '@middy/http-response-serializer';
 import { log } from '../helper/logger';
 import { MiddyValidatorSchema } from './types';
 
+interface RestApiHandlerOptions {
+  bodySchema: MiddyValidatorSchema;
+}
+
 const logEvent = (_: MiddlewareObj<APIGatewayEvent> = {}): MiddlewareObj<APIGatewayEvent> => {
   return {
     before: (request: middy.Request) => {
@@ -29,29 +33,24 @@ export function restApiHandler(handler: Handler, options?: RestApiHandlerOptions
     .use(errorLogger())
     .use(errorHandler())
     .use(responseSerializer({
-        serializers: [
-          {
+        serializers: [{
             regex: /^application\/json$/,
             serializer: ({ body }) => JSON.stringify(body),
-          },
-        ],
+        }],
         defaultContentType: 'application/json',
       }),
     );
 }
 
 function bodyEventSchema(schema: MiddyValidatorSchema) {
+  const baseSchema: MiddyValidatorSchema = {
+    type: 'object',
+    additionalProperties: true,
+  }
+
   if (schema) {
     return { type: 'object', properties: { body: schema } };
   }
   return baseSchema;
 }
 
-interface RestApiHandlerOptions {
-  bodySchema: MiddyValidatorSchema;
-}
-
-const baseSchema: MiddyValidatorSchema = {
-  type: 'object',
-  additionalProperties: true,
-}
