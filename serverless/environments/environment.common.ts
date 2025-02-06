@@ -19,6 +19,7 @@ export const COMMON_ENVS = {
   DELAYED_EXECUTION_STATEMACHINE_ARN: StateMachineArn('DELAYED_EXECUTION_STATEMACHINE'),
 
   /** sqs */
+  QUEUE_EXAMPLE_NAME: ResourceName('queue-example'),
+  QUEUE_EXAMPLE_NAME_DLQ: ResourceName('queue-example-dlq'),
   QUEUE_EXAMPLE_URL: Ref('QueueExample'),
 };
-

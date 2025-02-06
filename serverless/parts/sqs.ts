@@ -1,4 +1,4 @@
-import { Arn, ResourceName } from '../intrinsic-fn';
+import { Arn } from '../intrinsic-fn';
 import { AWSPartitial } from '../types';
 
 export const sqs: AWSPartitial = {
@@ -52,7 +52,7 @@ export const sqs: AWSPartitial = {
       QueueExample: {
         Type: 'AWS::SQS::Queue',
         Properties: {
-          QueueName: ResourceName('queue-example'),
+          QueueName: '${param:QUEUE_EXAMPLE_NAME}',
           MessageRetentionPeriod: 1209600,
           VisibilityTimeout: 900,
           RedrivePolicy: {
@@ -64,7 +64,7 @@ export const sqs: AWSPartitial = {
       QueueExampleDLQ: {
         Type: 'AWS::SQS::Queue',
         Properties: {
-          QueueName: ResourceName('queue-example-dlq'),
+          QueueName: '${param:QUEUE_EXAMPLE_NAME_DLQ}',
           MessageRetentionPeriod: 1209600,
         },
       },
