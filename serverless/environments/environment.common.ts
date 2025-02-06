@@ -1,4 +1,4 @@
-import { ResourceName, StateMachineArn } from '../intrinsic-fn';
+import { Ref, ResourceName, StateMachineArn } from '../intrinsic-fn';
 
 export const COMMON_ENVS = {
   SERVICE_NAME: 'sls-v4',
@@ -17,5 +17,8 @@ export const COMMON_ENVS = {
   /** step functions */
   DELAYED_EXECUTION_STATEMACHINE: ResourceName('delayed-execution'),
   DELAYED_EXECUTION_STATEMACHINE_ARN: StateMachineArn('DELAYED_EXECUTION_STATEMACHINE'),
+
+  /** sqs */
+  QUEUE_EXAMPLE_URL: Ref('QueueExample'),
 };
 

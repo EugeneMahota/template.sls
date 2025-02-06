@@ -22,7 +22,7 @@ export function restApiHandler(handler: Handler, options?: RestApiHandlerOptions
     .use(jsonBodyParser())
     .use(
       validator({
-        eventSchema: transpileSchema(eventSchema(options?.bodySchema)),
+        eventSchema: transpileSchema(bodyEventSchema(options?.bodySchema)),
       })
     )
     .use(logEvent())
@@ -40,7 +40,7 @@ export function restApiHandler(handler: Handler, options?: RestApiHandlerOptions
     );
 }
 
-function eventSchema(schema: MiddyValidatorSchema) {
+function bodyEventSchema(schema: MiddyValidatorSchema) {
   if (schema) {
     return { type: 'object', properties: { body: schema } };
   }
