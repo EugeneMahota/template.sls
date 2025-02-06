@@ -25,7 +25,10 @@ const mainConfig: CustomServerless = {
       bundle: true,
       minify: '${param:ESB_MINIFY}',
       sourcemap: '${param:ESB_SOURCEMAP}',
-      exclude: ['aws-sdk', '@aws-sdk/credential-providers'],
+      exclude: [
+        '@aws-sdk/credential-providers',
+        '@aws-sdk/client-sfn',
+      ],
       target: 'node22',
       platform: 'node',
       define: {

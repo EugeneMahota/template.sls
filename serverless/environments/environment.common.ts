@@ -1,4 +1,4 @@
-import { ResourceName } from '../intrinsic-fn';
+import { ResourceName, StateMachineArn } from '../intrinsic-fn';
 
 export const COMMON_ENVS = {
   SERVICE_NAME: 'sls-v4',
@@ -14,7 +14,8 @@ export const COMMON_ENVS = {
   LOGS_TABLE: ResourceName('logs'),
   LOGS_TABLE_CODE_INDEX: ResourceName('logs-code-index'),
 
-  /** step functions statemachine */
-  DEFERRED_CALL_STATEMACHINE: ResourceName('deferred-call'),
-
+  /** step functions */
+  DELAYED_EXECUTION_STATEMACHINE: ResourceName('delayed-execution'),
+  DELAYED_EXECUTION_STATEMACHINE_ARN: StateMachineArn('DELAYED_EXECUTION_STATEMACHINE'),
 };
+

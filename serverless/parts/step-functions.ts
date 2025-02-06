@@ -1,32 +1,60 @@
-import { Arn } from '../intrinsic-fn';
+import { FunctionArn } from '../intrinsic-fn';
 import { AWSPartitial } from '../types';
 
-const deferredCallHandler: string = 'deferredCallHandler';
-const deferredCallStatemachine: string = 'deferredCall';
+const delayedFunctionHandler: string = 'delayedFunctionHandler';
 
 export const stepFunctions: AWSPartitial = {
+  provider: {
+    iam: {
+      role: {
+        statements: [
+          {
+            Effect: 'Allow',
+            Action: ['states:StartExecution'],
+            Resource: [
+              '${param:DELAYED_EXECUTION_STATEMACHINE_ARN}',
+            ],
+          },
+        ],
+      },
+    },
+  },
   functions: {
-    [deferredCallHandler]: {
-      handler: 'src/api/step-functions/handler.stepHandler',
+    scheduleDelayedFunction: {
+      handler: 'src/api/step-functions/handler.scheduleDelayedFunction',
+      memorySize: 128,
+      timeout: 29,
+      events: [
+        {
+          http: {
+            method: 'post',
+            path: '/api/schedule-delayed-function',
+            cors: true,
+          }
+        },
+      ],
+    },
+    [delayedFunctionHandler]: {
+      handler: 'src/api/step-functions/handler.delayedFunctionHandler',
       memorySize: 128,
       timeout: 900,
     },
   },
   stepFunctions: {
     stateMachines: {
-      [deferredCallStatemachine]: {
-        name: '${param:DEFERRED_CALL_STATEMACHINE}',
+      delayedExecutionStateMachine: {
+        name: '${param:DELAYED_EXECUTION_STATEMACHINE}',
         definition: {
-          StartAt: 'waitFunction',
+          StartAt: 'waitForExecution',
           States: {
-            waitFunction: {
+            waitForExecution: {
               Type: 'Wait',
-              TimestampPath: '$.waitUntilDate',
-              Next: 'callFunction',
+              TimestampPath: '$.scheduledTime',
+              Next: 'executeFunction',
             },
-            callFunction: {
+            executeFunction: {
               Type: 'Task',
-              Resource: Arn(deferredCallHandler),
+              Resource: FunctionArn(delayedFunctionHandler),
               End: true,
             },
           },
@@ -35,46 +63,4 @@ export const stepFunctions: AWSPartitial = {
     },
     validate: true,
   },
-  // resources: {
-  //   Resources: {
-  //     CallStepFunctionsIamRole: {
-  //       Type: 'AWS::IAM::Role',
-  //       Properties: {
-  //         AssumeRolePolicyDocument: {
-  //           Version: '2012-10-17',
-  //           Statement: [
-  //             {
-  //               Effect: 'Allow',
-  //               Principal: {
-  //                 Service: ['lambda.amazonaws.com'],
-  //               },
-  //               Action: ['sts:AssumeRole'],
-  //             },
-  //           ],
-  //         },
-  //         Policies: [
-  //           {
-  //             PolicyName: ResourceName('call-step-functions'),
-  //             PolicyDocument: {
-  //               Version: '2012-10-17',
-  //               Statement: [
-  //                 {
-  //                   Effect: 'Allow',
-  //                   Action: [
-  //                     'logs:CreateLogGroup',
-  //                     'logs:CreateLogStream',
-  //                     'logs:PutLogEvents',
-  //                   ],
-  //                   Resource: [
-  //                     Arn(deferredCallStatemachine),
-  //                   ],
-  //                 },
-  //               ],
-  //             },
-  //           },
-  //         ],
-  //       },
-  //     },
-  //   }
-  // },
 };
