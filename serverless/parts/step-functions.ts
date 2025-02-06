@@ -1,4 +1,4 @@
-import { FunctionArn } from '../intrinsic-fn';
+import { Arn } from '../intrinsic-fn';
 import { AWSPartitial } from '../types';
 
 const delayedFunctionHandler: string = 'delayedFunctionHandler';
@@ -11,9 +11,7 @@ export const stepFunctions: AWSPartitial = {
           {
             Effect: 'Allow',
             Action: ['states:StartExecution'],
-            Resource: [
-              '${param:DELAYED_EXECUTION_STATEMACHINE_ARN}',
-            ],
+            Resource: ['${param:DELAYED_EXECUTION_STATEMACHINE_ARN}'],
           },
         ],
       },
@@ -42,7 +40,7 @@ export const stepFunctions: AWSPartitial = {
   },
   stepFunctions: {
     stateMachines: {
-      delayedExecutionStateMachine: {
+      DelayedExecutionStateMachine: {
         name: '${param:DELAYED_EXECUTION_STATEMACHINE}',
         definition: {
           StartAt: 'waitForExecution',
@@ -54,7 +52,7 @@ export const stepFunctions: AWSPartitial = {
             },
             executeFunction: {
               Type: 'Task',
-              Resource: FunctionArn(delayedFunctionHandler),
+              Resource: Arn(delayedFunctionHandler),
               End: true,
             },
           },

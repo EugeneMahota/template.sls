@@ -1,4 +1,4 @@
-import { FunctionArn, IndexArn } from '../intrinsic-fn';
+import { Arn, IndexArn } from '../intrinsic-fn';
 import { AWSPartitial } from '../types';
 
 const EventLogsTableName: string = 'EventLogsTable';
@@ -21,7 +21,7 @@ export const dynamoTables: AWSPartitial = {
               'dynamodb:BatchWriteItem',
             ],
             Resource: [
-              FunctionArn(EventLogsTableName),
+              Arn(EventLogsTableName),
               IndexArn('LOGS_TABLE', 'LOGS_TABLE_CODE_INDEX'),
             ],
           },

@@ -1,4 +1,4 @@
-import { FunctionArn, ResourceName } from '../intrinsic-fn';
+import { Arn, ResourceName } from '../intrinsic-fn';
 import { AWSPartitial } from '../types';
 
 export const sqs: AWSPartitial = {
@@ -10,8 +10,8 @@ export const sqs: AWSPartitial = {
             Effect: 'Allow',
             Action: ['sqs:*'],
             Resource: [
-              FunctionArn('QueueExample'),
-              FunctionArn('QueueExampleDLQ')
+              Arn('QueueExample'),
+              Arn('QueueExampleDLQ')
             ],
           },
         ],
@@ -40,7 +40,7 @@ export const sqs: AWSPartitial = {
       events: [
         {
           sqs: {
-            arn: FunctionArn('QueueExample'),
+            arn: Arn('QueueExample'),
             batchSize: 1,
           },
         },
@@ -56,7 +56,7 @@ export const sqs: AWSPartitial = {
           MessageRetentionPeriod: 1209600,
           VisibilityTimeout: 900,
           RedrivePolicy: {
-            deadLetterTargetArn: FunctionArn('QueueExampleDLQ'),
+            deadLetterTargetArn: Arn('QueueExampleDLQ'),
             maxReceiveCount: 2,
           },
         },

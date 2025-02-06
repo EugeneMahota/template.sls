@@ -1,4 +1,4 @@
-export function FunctionArn(resource: string): { 'Fn::GetAtt': [string, 'Arn'] } {
+export function Arn(resource: string): { 'Fn::GetAtt': [string, 'Arn'] } {
   return { 'Fn::GetAtt': [resource, 'Arn'] };
 }
 
@@ -15,12 +15,9 @@ export function StateMachineArn(stateMachineNameEnv: string): { 'Fn::Sub': unkno
 }
 
 export function ResourceName(name: string): string {
-  return '${self:service}-' + name + '-${opt:stage, "dev"}';
+  return '${self:service}-'+'${opt:stage, "dev"}-'+name;
 }
 
-
 export function Ref(ref: string) {
-  return {
-    Ref: ref,
-  };
+  return { Ref: ref };
 }
