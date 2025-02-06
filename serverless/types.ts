@@ -6,7 +6,7 @@ export type CustomServerless = Serverless & SlsStages & Build & StepFunction;
 export type AWSPartitial = Omit<Partial<CustomServerless>, 'provider'> & { provider?: Partial<CustomServerless['provider']> };
 
 interface Stage {
-  params: Record<string, string | number | boolean>;
+  params: Record<string, any>;
   observability?: boolean;
 }
 

@@ -2,6 +2,7 @@ import { buildEnvs, buildStages } from './serverless/environments/env-builder';
 import { lambdaFunctions } from './serverless/parts/functions';
 import { permissions } from './serverless/parts/permissions';
 import { stepFunctions } from './serverless/parts/step-functions';
+import { dynamoTables } from './serverless/parts/tables';
 import { CustomServerless } from './serverless/types';
 import { joinParts } from './serverless/utils';
 
@@ -55,6 +56,6 @@ const mainConfig: CustomServerless = {
 module.exports = joinParts(mainConfig, [
   permissions,
   lambdaFunctions,
-  // dynamoTables,
+  dynamoTables,
   stepFunctions
 ]);
