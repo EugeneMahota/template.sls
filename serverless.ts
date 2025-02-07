@@ -9,7 +9,7 @@ import { joinParts } from './serverless/utils';
 
 const mainConfig: CustomServerless = {
   service: '${param:SERVICE_NAME}',
-  frameworkVersion: '4.5.2',
+  frameworkVersion: '4.6.2',
   stages: buildStages(),
   provider: {
     name: 'aws',
@@ -27,10 +27,7 @@ const mainConfig: CustomServerless = {
       bundle: true,
       minify: '${param:ESB_MINIFY}',
       sourcemap: '${param:ESB_SOURCEMAP}',
-      exclude: [
-        '@aws-sdk/credential-providers',
-        '@aws-sdk/client-sfn',
-      ],
+      exclude: ['@aws-sdk/*'],
       target: 'node22',
       platform: 'node',
       define: {
