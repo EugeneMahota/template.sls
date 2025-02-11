@@ -35,3 +35,13 @@ export const handleQueueItem = async (event: SQSEvent) => {
     log.error(error);
   }
 };
+
+
+export const handleFailedQueueItem = async (event: SQSEvent) => {
+  try {
+    log('EVENT: ', event);
+
+  } catch (error) {
+    log.error(error);
+  }
+}

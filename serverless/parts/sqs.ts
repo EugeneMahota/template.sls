@@ -46,6 +46,19 @@ export const sqs: AWSPartitial = {
         },
       ]
     },
+    handleFailedQueueItem: {
+      handler: 'src/api/sqs/handler.handleFailedQueueItem',
+      memorySize: 128,
+      timeout: 29,
+      events: [
+        {
+          sqs: {
+            arn: Arn('QueueExampleDLQ'),
+            batchSize: 1,
+          },
+        },
+      ]
+    },
   },
   resources: {
     Resources: {

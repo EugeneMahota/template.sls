@@ -8,10 +8,10 @@ type TestFuncBody = { isShowError: boolean };
 type TestFuncResponse = { message: string };
 
 export const testFunction: MiddyfiedHandler<LambdaEvent<TestFuncBody, {}, {}, {}>> = restApiHandler(
-  async (event): Promise<TestFuncResponse> => {
+  async ({ body }): Promise<TestFuncResponse> => {
 
-    if (event.body.isShowError) {
-      throw createHttpError.BadRequest('Something went wrong');
+    if (body.isShowError) {
+      throw createHttpError.BadRequest('Something went wrong!');
     }
 
     return { message: 'All good:)' };
