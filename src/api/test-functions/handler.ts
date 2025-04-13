@@ -1,5 +1,5 @@
 import { MiddyfiedHandler } from '@middy/core';
-import * as createHttpError from 'http-errors';
+import { BadRequest } from 'http-errors';
 import { restApiHandler } from '../rest-api-wrapper';
 import { LambdaEvent } from '../types';
 import { testFunctionValidator } from './test-functions.validator';
@@ -11,7 +11,7 @@ export const testFunction: MiddyfiedHandler<LambdaEvent<TestFuncBody, {}, {}, {}
   async ({ body }): Promise<TestFuncResponse> => {
 
     if (body.isShowError) {
-      throw createHttpError.BadRequest('Something went wrong!');
+      throw BadRequest(JSON.stringify({ message: 'Something went wrong!' }));
     }
 
     return { message: 'All good:)' };
