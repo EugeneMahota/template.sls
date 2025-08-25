@@ -1,20 +1,32 @@
 import { MiddyfiedHandler } from '@middy/core';
+import { Handler } from 'aws-lambda';
 import { BadRequest } from 'http-errors';
 import { restApiHandler } from '../rest-api-wrapper';
 import { LambdaEvent } from '../types';
-import { testFunctionValidator } from './test-functions.validator';
 
 type TestFuncBody = { isShowError: boolean };
 type TestFuncResponse = { message: string };
 
-export const testFunction: MiddyfiedHandler<LambdaEvent<TestFuncBody, {}, {}, {}>> = restApiHandler(
-  async ({ body }): Promise<TestFuncResponse> => {
+const testFunctionHandler: Handler = async ({ body }): Promise<TestFuncResponse> => {
+  if (body.isShowError) {
+    throw BadRequest(JSON.stringify({ message: 'Something went wrong!' }));
+  }
+  return { message: 'All good:)' };
+};
 
-    if (body.isShowError) {
-      throw BadRequest(JSON.stringify({ message: 'Something went wrong!' }));
-    }
+export const testFunction: MiddyfiedHandler<LambdaEvent<TestFuncBody, {}, {}, {}>> = restApiHandler(testFunctionHandler);
 
-    return { message: 'All good:)' };
-  },
-  { bodySchema: testFunctionValidator },
-);
+// if (require.main === module) {
+//   const context = {
+//     getRemainingTimeInMillis: () => 30_000,
+//     functionName: 'local',
+//     awsRequestId: 'local',
+//     callbackWaitsForEmptyEventLoop: false,
+//   };
+//   testFunction({
+//     headers: { 'Content-Type': 'application/json' },
+//     // @ts-ignore
+//     body: JSON.stringify({ isShowError: false }),
+//   }, context, null)
+//     .then((v) => console.log('RESPONSE: ', v));
+// }

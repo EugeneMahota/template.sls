@@ -15,7 +15,7 @@ export function StateMachineArn(stateMachineNameEnv: string): { 'Fn::Sub': unkno
 }
 
 export function ResourceName(name: string): string {
-  return '${self:service}-'+'${opt:stage, "dev"}-'+name;
+  return '${self:service}-'+name+'-${opt:stage, "dev"}';
 }
 
 export function Ref(ref: string) {

@@ -1,3 +1,6 @@
+import { loadEnvsLocally } from './load-envs-locally';
+loadEnvsLocally();
+
 export type Stage = 'local' | 'dev' | 'test' | 'prod';
 
 export function getStage(): Stage {
