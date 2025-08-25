@@ -9,7 +9,9 @@ type TestFuncResponse = { message: string };
 
 const testFunctionHandler: Handler = async ({ body }): Promise<TestFuncResponse> => {
   if (body.isShowError) {
-    throw BadRequest(JSON.stringify({ message: 'Something went wrong!' }));
+    throw BadRequest(JSON.stringify({
+      message: 'Something went wrong!'
+    }));
   }
   return { message: 'All good:)' };
 };
