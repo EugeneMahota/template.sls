@@ -2,7 +2,7 @@ import { Ref, ResourceName, StateMachineArn } from '../intrinsic-fn';
 
 export const COMMON_ENVS = {
   SERVICE_NAME: 'sls-v4',
-  REGION: 'us-east-1',
+  REGION: 'eu-west-1',
   PROFILE: 'eugene',
   IS_OFFLINE: false,
 
