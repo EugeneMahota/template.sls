@@ -23,7 +23,6 @@ export function loadEnvsLocally() {
   Object.entries(envs).forEach(([name, value]) => {
     process.env[name] = value;
   });
-  console.log(process.env);
 }
 
 function loadEnvsFromCloud(stage: string) {
