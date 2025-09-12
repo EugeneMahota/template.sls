@@ -4,7 +4,7 @@ export function Arn(resource: string): { 'Fn::GetAtt': [string, 'Arn'] } {
 
 export function IndexArn(tableEnv: string, indexEnv: string): { 'Fn::Sub': unknown } {
   return { 'Fn::Sub':
-      'arn:aws:dynamodb:${param:REGION}:${AWS::AccountId}:table/${param:'+tableEnv+'}/index/${param:'+indexEnv+'}',
+      'arn:aws:dynamodb:${param:AWS_REGION}:${AWS::AccountId}:table/${param:'+tableEnv+'}/index/${param:'+indexEnv+'}',
   };
 }
 
@@ -15,7 +15,7 @@ export function StateMachineArn(stateMachineNameEnv: string): { 'Fn::Sub': unkno
 }
 
 export function ResourceName(name: string): string {
-  return '${self:service}-'+'${opt:stage, "dev"}-'+name;
+  return '${self:service}-'+name+'-${opt:stage, "dev"}';
 }
 
 export function Ref(ref: string) {

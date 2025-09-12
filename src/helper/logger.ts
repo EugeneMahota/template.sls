@@ -29,7 +29,7 @@ export const warn = wrapLogger(console.warn.bind(console));
 
 
 export function cloudWatchLogUrl(): string {
-  const region: string = getEnv('REGION');
+  const region: string = getEnv('AWS_REGION');
   const logGroupName: string = getEnv('AWS_LAMBDA_LOG_GROUP_NAME');
   const logStreamName: string = getEnv('AWS_LAMBDA_LOG_STREAM_NAME');
   const encodedLogGroupName: string = encodeURIComponent(logGroupName);

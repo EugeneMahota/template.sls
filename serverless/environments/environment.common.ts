@@ -2,8 +2,8 @@ import { Ref, ResourceName, StateMachineArn } from '../intrinsic-fn';
 
 export const COMMON_ENVS = {
   SERVICE_NAME: 'sls-v4',
-  REGION: 'us-east-1',
-  PROFILE: 'eugene',
+  AWS_REGION: 'eu-west-1',
+  AWS_PROFILE: 'eugene_account_2',
   IS_OFFLINE: false,
 
   /** esbuild */

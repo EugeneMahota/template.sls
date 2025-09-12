@@ -9,13 +9,14 @@ import { joinParts } from './serverless/utils';
 
 const mainConfig: CustomServerless = {
   service: '${param:SERVICE_NAME}',
-  frameworkVersion: '4.6.2',
+  frameworkVersion: '4.18.1',
+  useDotenv: true,
   stages: buildStages(),
   provider: {
     name: 'aws',
     runtime: 'nodejs22.x',
-    region: '${param:REGION}',
-    profile: '${param:PROFILE}',
+    region: '${param:AWS_REGION}',
+    profile: '${param:AWS_PROFILE}',
     stage: '${opt:stage, "dev"}',
     environment: buildEnvs(),
   },
@@ -48,6 +49,7 @@ const mainConfig: CustomServerless = {
     'serverless-prune-plugin',
     'serverless-offline',
     'serverless-step-functions',
+    'serverless-export-env',
   ],
 }
 

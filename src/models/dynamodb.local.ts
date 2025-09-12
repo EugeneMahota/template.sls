@@ -10,7 +10,7 @@ export function dynamodbLocalConnection(): void {
       const credentials = fromIni({ profile: getEnv('PROFILE') });
       const ddb = new dynamoose.aws.ddb.DynamoDB({
         credentials,
-        region: getEnv('REGION'),
+        region: getEnv('AWS_REGION'),
       });
 
       dynamoose.aws.ddb.set(ddb);

@@ -4,15 +4,7 @@ import { SQSEvent } from 'aws-lambda';
 import { getEnv } from '../../helper/environment';
 import { log } from '../../helper/logger';
 import { restApiHandler } from '../rest-api-wrapper';
-import { LambdaEvent, MiddyValidatorSchema } from '../types';
-
-const queueItemSchema: MiddyValidatorSchema = {
-  type: 'object',
-  properties: {
-    job: { type: 'string' },
-  },
-  required: ['job'],
-};
+import { LambdaEvent } from '../types';
 
 export const addItemInQueue: MiddyfiedHandler<LambdaEvent<{ job: string; }, {}, {}, {}>> = restApiHandler(
   async ({ body }): Promise<{ message: string }> => {
@@ -24,13 +16,11 @@ export const addItemInQueue: MiddyfiedHandler<LambdaEvent<{ job: string; }, {}, 
     }));
     return { message: 'All fine:)' };
   },
-  { bodySchema: queueItemSchema },
 );
 
 export const handleQueueItem = async (event: SQSEvent) => {
   try {
     log('EVENT: ', event);
-
   } catch (error) {
     log.error(error);
   }
@@ -40,7 +30,6 @@ export const handleQueueItem = async (event: SQSEvent) => {
 export const handleFailedQueueItem = async (event: SQSEvent) => {
   try {
     log('EVENT: ', event);
-
   } catch (error) {
     log.error(error);
   }
