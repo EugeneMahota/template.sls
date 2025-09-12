@@ -4,7 +4,7 @@ export function Arn(resource: string): { 'Fn::GetAtt': [string, 'Arn'] } {
 
 export function IndexArn(tableEnv: string, indexEnv: string): { 'Fn::Sub': unknown } {
   return { 'Fn::Sub':
-      'arn:aws:dynamodb:${param:REGION}:${AWS::AccountId}:table/${param:'+tableEnv+'}/index/${param:'+indexEnv+'}',
+      'arn:aws:dynamodb:${param:AWS_REGION}:${AWS::AccountId}:table/${param:'+tableEnv+'}/index/${param:'+indexEnv+'}',
   };
 }
 

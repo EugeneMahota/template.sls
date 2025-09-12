@@ -15,8 +15,8 @@ const mainConfig: CustomServerless = {
   provider: {
     name: 'aws',
     runtime: 'nodejs22.x',
-    region: '${param:REGION}',
-    profile: '${param:PROFILE}',
+    region: '${param:AWS_REGION}',
+    profile: '${param:AWS_PROFILE}',
     stage: '${opt:stage, "dev"}',
     environment: buildEnvs(),
   },
