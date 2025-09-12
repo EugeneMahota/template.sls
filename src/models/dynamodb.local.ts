@@ -6,13 +6,13 @@ import { log } from '../helper/logger';
 export function dynamodbLocalConnection(): void {
   if (getEnv('IS_OFFLINE') === 'true') {
     try {
-
-      const credentials = fromIni({ profile: getEnv('PROFILE') });
+      const credentials = fromIni({
+        profile: getEnv('AWS_PROFILE'),
+      });
       const ddb = new dynamoose.aws.ddb.DynamoDB({
         credentials,
         region: getEnv('AWS_REGION'),
       });
-
       dynamoose.aws.ddb.set(ddb);
     } catch (error) {
       log('dynamodbLocal: ', error);
